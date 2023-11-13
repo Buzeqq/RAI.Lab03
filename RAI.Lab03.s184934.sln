@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RAI.Lab03.s184934.Web", "RAI.Lab03.s184934.Web\RAI.Lab03.s184934.Web.csproj", "{40A4E638-A82C-43F7-BAC1-206523C0898E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RAI.Lab03.s184934.Core", "RAI.Lab03.s184934.Core\RAI.Lab03.s184934.Core.csproj", "{108B4458-DC26-450F-A0F3-B02281836D74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RAI.Lab03.s184934.ConsoleInterface", "RAI.Lab03.s184934.ConsoleInterface\RAI.Lab03.s184934.ConsoleInterface.csproj", "{4BA6B86C-D8B6-48C0-AA12-CF844B51725E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40A4E638-A82C-43F7-BAC1-206523C0898E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40A4E638-A82C-43F7-BAC1-206523C0898E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40A4E638-A82C-43F7-BAC1-206523C0898E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40A4E638-A82C-43F7-BAC1-206523C0898E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{108B4458-DC26-450F-A0F3-B02281836D74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{108B4458-DC26-450F-A0F3-B02281836D74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{108B4458-DC26-450F-A0F3-B02281836D74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{108B4458-DC26-450F-A0F3-B02281836D74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BA6B86C-D8B6-48C0-AA12-CF844B51725E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BA6B86C-D8B6-48C0-AA12-CF844B51725E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BA6B86C-D8B6-48C0-AA12-CF844B51725E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BA6B86C-D8B6-48C0-AA12-CF844B51725E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
