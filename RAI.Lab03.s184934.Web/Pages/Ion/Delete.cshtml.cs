@@ -16,7 +16,7 @@ public class DeleteModel : PageModel
         _context = context;
     }
 
-    [BindProperty] public IonDto Ion { get; set; } = default!;
+    [BindProperty] public IonDto IonDto { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(Guid id)
     {
@@ -26,7 +26,7 @@ public class DeleteModel : PageModel
 
         if (ion is null) return NotFound();
 
-        Ion = ion.AsDto();
+        IonDto = ion.AsDto();
         return Page();
     }
 

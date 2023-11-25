@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using RAI.Lab03.s184934.Core.Entities;
 using RAI.Lab03.s184934.Web.Data;
+using RAI.Lab03.s184934.Web.Data.DTO.Company;
 
-namespace RAI.Lab03.s184934.Web.Pages.Companies;
+namespace RAI.Lab03.s184934.Web.Pages.Company;
 
 public class IndexModel : PageModel
 {
@@ -14,10 +14,10 @@ public class IndexModel : PageModel
         _context = context;
     }
 
-    public IList<Company> Companies { get; set; } = default!;
+    public IList<CompanyDto> CompanyDtos { get; set; } = default!;
 
     public async Task OnGetAsync()
     {
-        if (_context.Companies != null) Companies = await _context.Companies.ToListAsync();
+        CompanyDtos = await _context.Companies.Select(c => c.AsDto()).ToListAsync();
     }
 }

@@ -5,7 +5,7 @@ using RAI.Lab03.s184934.Core.ValueObjects;
 using RAI.Lab03.s184934.Web.Data;
 using RAI.Lab03.s184934.Web.Data.DTO.Company;
 
-namespace RAI.Lab03.s184934.Web.Pages.Companies;
+namespace RAI.Lab03.s184934.Web.Pages.Company;
 
 public class DeleteModel : PageModel
 {
@@ -16,7 +16,7 @@ public class DeleteModel : PageModel
         _context = context;
     }
 
-    [BindProperty] public CompanyDto Company { get; set; } = default!;
+    [BindProperty] public CompanyDto CompanyDto { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(Guid id)
     {
@@ -26,11 +26,7 @@ public class DeleteModel : PageModel
 
         if (company is null) return NotFound();
 
-        Company = new CompanyDto(company.Id,
-            company.Name,
-            company.PhoneNumber,
-            company.Email,
-            company.GetCompanyType());
+        CompanyDto = company.AsDto();
         return Page();
     }
 

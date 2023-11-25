@@ -13,13 +13,13 @@ public class ApplicationDbContext : IdentityDbContext
 
     public DbSet<MineralWater> MineralWaters { get; }
     public DbSet<Ion> Ion { get; set; }
-    public DbSet<Cation> Cations { get; }
-    public DbSet<Anion> Anions { get; }
-    public DbSet<Packaging> Packaging { get; }
-    public DbSet<WaterType> WaterTypes { get; }
+    public DbSet<Cation> Cations { get; set; }
+    public DbSet<Anion> Anions { get; set; }
+    public DbSet<Packaging> Packaging { get; set; }
+    public DbSet<WaterType> WaterTypes { get; set; }
     public DbSet<Company> Companies { get; set; }
-    public DbSet<Producer> Producers { get; }
-    public DbSet<Supplier> Supplier { get; }
+    public DbSet<Producer> Producers { get; set; }
+    public DbSet<Supplier> Supplier { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

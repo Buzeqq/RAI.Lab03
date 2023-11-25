@@ -5,7 +5,7 @@ using RAI.Lab03.s184934.Core.ValueObjects;
 using RAI.Lab03.s184934.Web.Data;
 using RAI.Lab03.s184934.Web.Data.DTO.Company;
 
-namespace RAI.Lab03.s184934.Web.Pages.Companies;
+namespace RAI.Lab03.s184934.Web.Pages.Company;
 
 public class EditModel : PageModel
 {

@@ -5,7 +5,7 @@ using RAI.Lab03.s184934.Core.ValueObjects;
 using RAI.Lab03.s184934.Web.Data;
 using RAI.Lab03.s184934.Web.Data.DTO.Company;
 
-namespace RAI.Lab03.s184934.Web.Pages.Companies;
+namespace RAI.Lab03.s184934.Web.Pages.Company;
 
 public class DetailsModel : PageModel
 {
@@ -16,7 +16,7 @@ public class DetailsModel : PageModel
         _context = context;
     }
 
-    public CompanyDto DetailsCompany { get; set; } = default!;
+    public CompanyDto CompanyDto { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(Guid id)
     {
@@ -27,8 +27,7 @@ public class DetailsModel : PageModel
 
         if (company is null) return NotFound();
 
-        DetailsCompany = new CompanyDto(company.Id, company.Name, company.PhoneNumber, company.Email,
-            company.GetCompanyType());
+        CompanyDto = company.AsDto();
         return Page();
     }
 }

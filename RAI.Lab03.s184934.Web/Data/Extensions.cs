@@ -1,6 +1,7 @@
 using RAI.Lab03.s184934.Core.Entities;
 using RAI.Lab03.s184934.Web.Data.DTO.Company;
 using RAI.Lab03.s184934.Web.Data.DTO.Ion;
+using RAI.Lab03.s184934.Web.Data.DTO.Packaging;
 
 namespace RAI.Lab03.s184934.Web.Data;
 
@@ -40,5 +41,13 @@ public static class Extensions
             Email = company.Email,
             PhoneNumber = company.PhoneNumber,
             Type = company.GetCompanyType()
+        };
+
+    public static PackagingDto AsDto(this Packaging packaging) =>
+        new()
+        {
+            Id = packaging.Id,
+            Name = packaging.Name,
+            Volume = packaging.Volume
         };
 }

@@ -27,6 +27,7 @@
 
     <ItemGroup>
         <Folder Include="Pages\Ion\"/>
+        <Folder Include="Pages\Packaging\" />
     </ItemGroup>
 
 </Project>

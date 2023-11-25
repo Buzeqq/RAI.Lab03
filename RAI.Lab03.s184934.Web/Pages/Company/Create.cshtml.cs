@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RAI.Lab03.s184934.Core.Entities;
 using RAI.Lab03.s184934.Web.Data;
 using RAI.Lab03.s184934.Web.Data.DTO.Company;
 
-namespace RAI.Lab03.s184934.Web.Pages.Companies;
+namespace RAI.Lab03.s184934.Web.Pages.Company;
 
 public class CreateModel : PageModel
 {
@@ -28,7 +27,7 @@ public class CreateModel : PageModel
     {
         if (!ModelState.IsValid) return Page();
 
-        Company? company;
+        Core.Entities.Company? company;
         try
         {
             company = CompanyDto.AsCompany(Guid.NewGuid());

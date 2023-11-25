@@ -23,7 +23,7 @@ public class DetailsModel : PageModel
         if (id == Guid.Empty) return NotFound();
 
         var ion = await _context.Ion.FirstOrDefaultAsync(m => m.Id == new Id(id));
-        if (ion == null) return NotFound();
+        if (ion is null) return NotFound();
 
         Ion = ion.AsDto();
         return Page();
