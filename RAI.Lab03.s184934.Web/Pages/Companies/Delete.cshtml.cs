@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using RAI.Lab03.s184934.Core.Entities;
 using RAI.Lab03.s184934.Core.ValueObjects;
 using RAI.Lab03.s184934.Web.Data;
 using RAI.Lab03.s184934.Web.Data.DTO.Company;
@@ -18,7 +17,7 @@ namespace RAI.Lab03.s184934.Web.Pages.Companies
         }
 
         [BindProperty]
-        public DeleteCompanyDto Company { get; set; } = default!;
+        public CompanyDto Company { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
@@ -34,7 +33,7 @@ namespace RAI.Lab03.s184934.Web.Pages.Companies
                 return NotFound();
             }
 
-            Company = new DeleteCompanyDto(company.Id,
+            Company = new CompanyDto(company.Id,
                 company.Name,
                 company.PhoneNumber,
                 company.Email,

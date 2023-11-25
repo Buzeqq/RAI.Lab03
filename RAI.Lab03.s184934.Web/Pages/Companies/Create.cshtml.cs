@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RAI.Lab03.s184934.Core.Entities;
 using RAI.Lab03.s184934.Web.Data;
@@ -22,7 +21,7 @@ public class CreateModel : PageModel
     }
 
     [BindProperty]
-    public AddCompanyDto CompanyDto { get; set; } = default!;
+    public CompanyDto CompanyDto { get; set; } = default!;
 
 
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD

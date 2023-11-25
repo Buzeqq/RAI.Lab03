@@ -19,11 +19,11 @@ namespace RAI.Lab03.s184934.Web.Pages.Companies
 
         public Company? Company { get; set; }
         [BindProperty]
-        public UpdateCompanyDto CompanyDto { get; set; } = default!;
+        public CompanyDto CompanyDto { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            if (id == Guid.Empty || _context.Companies is null)
+            if (id == Guid.Empty)
             {
                 return NotFound();
             }
@@ -34,7 +34,7 @@ namespace RAI.Lab03.s184934.Web.Pages.Companies
                 return NotFound();
             }
 
-            CompanyDto = new UpdateCompanyDto(Company.Id, Company.Name, Company.PhoneNumber, Company.Email);
+            CompanyDto = new CompanyDto(Company.Id, Company.Name, Company.PhoneNumber, Company.Email, Company.GetCompanyType());
             return Page();
         }
 
@@ -46,8 +46,8 @@ namespace RAI.Lab03.s184934.Web.Pages.Companies
             {
                 return Page();
             }
-            var (id, name, phone, email) = CompanyDto;
-            Company = await _context.Companies.FirstOrDefaultAsync(m => m.Id == (Id)id);
+            var (id, name, phone, email, _) = CompanyDto;
+            Company = await _context.Companies.FirstOrDefaultAsync(m => m.Id == new Id(id));
             if (Company is null)
             {
                 return NotFound();
@@ -75,10 +75,8 @@ namespace RAI.Lab03.s184934.Web.Pages.Companies
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+
+                throw;
             }
 
             return RedirectToPage("./Index");

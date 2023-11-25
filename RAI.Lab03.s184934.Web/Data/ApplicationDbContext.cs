@@ -7,7 +7,7 @@ namespace RAI.Lab03.s184934.Web.Data;
 public class ApplicationDbContext : IdentityDbContext
 {
     public DbSet<MineralWater> MineralWaters { get; private set; }
-    private DbSet<Ion> Ion { get; set; }
+    public DbSet<Ion> Ion { get; set; }
     public DbSet<Cation> Cations { get; private set; }
     public DbSet<Anion> Anions { get; private set; }
     public DbSet<Packaging> Packaging { get; private set; }

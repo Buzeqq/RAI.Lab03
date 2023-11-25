@@ -21,13 +21,13 @@ internal class CreateModel : PageModel
     }
 
     [BindProperty]
-    public AddWaterTypeDto WaterType { get; set; } = default!;
+    public WaterTypeDto WaterType { get; set; } = default!;
 
 
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid || _context.WaterTypes == null || WaterType == null)
+        if (!ModelState.IsValid)
         {
             return Page();
         }

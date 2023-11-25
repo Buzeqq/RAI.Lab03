@@ -18,11 +18,11 @@ internal class EditModel : PageModel
     }
 
     [BindProperty]
-    public UpdateWaterTypeDto WaterType { get; set; } = default!;
+    public WaterTypeDto WaterType { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(Guid id)
     {
-        if (id == Guid.Empty || _context.WaterTypes == null)
+        if (id == Guid.Empty)
         {
             return NotFound();
         }
@@ -32,7 +32,7 @@ internal class EditModel : PageModel
         {
             return NotFound();
         }
-        WaterType = new UpdateWaterTypeDto(watertype.Id, watertype.Name);
+        WaterType = new WaterTypeDto(watertype.Id, watertype.Name);
         return Page();
     }
 
@@ -58,10 +58,8 @@ internal class EditModel : PageModel
             {
                 return NotFound();
             }
-            else
-            {
-                throw;
-            }
+
+            throw;
         }
 
         return RedirectToPage("./Index");

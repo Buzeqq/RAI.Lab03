@@ -16,7 +16,7 @@ namespace RAI.Lab03.s184934.Web.Pages.Companies
             _context = context;
         }
 
-        public CompanyDetailsDto Company { get; set; } = default!;
+        public CompanyDto DetailsCompany { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
@@ -33,7 +33,7 @@ namespace RAI.Lab03.s184934.Web.Pages.Companies
                 return NotFound();
             }
 
-            Company = new CompanyDetailsDto(company.Id, company.Name, company.PhoneNumber, company.Email, company.GetCompanyType());
+            DetailsCompany = new CompanyDto(company.Id, company.Name, company.PhoneNumber, company.Email, company.GetCompanyType());
             return Page();
         }
     }

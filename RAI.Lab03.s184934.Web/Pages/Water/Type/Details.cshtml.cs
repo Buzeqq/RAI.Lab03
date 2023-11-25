@@ -20,20 +20,18 @@ namespace RAI.Lab03.s184934.Web.Pages.Water.Type
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            if (id == Guid.Empty || _context.WaterTypes == null)
+            if (id == Guid.Empty)
             {
                 return NotFound();
             }
 
-            var watertype = await _context.WaterTypes.FirstOrDefaultAsync(m => m.Id == (Id)id);
-            if (watertype == null)
+            var waterType = await _context.WaterTypes.FirstOrDefaultAsync(m => m.Id == new Id(id));
+            if (waterType == null)
             {
                 return NotFound();
             }
-            else
-            {
-                WaterType = watertype;
-            }
+
+            WaterType = waterType;
             return Page();
         }
     }
