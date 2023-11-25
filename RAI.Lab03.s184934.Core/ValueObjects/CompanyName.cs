@@ -4,7 +4,7 @@ namespace RAI.Lab03.s184934.Core.ValueObjects;
 
 public sealed record CompanyName
 {
-    private string Value { get; }
+    public string Value { get; }
 
     public CompanyName(string value)
     {
@@ -12,7 +12,7 @@ public sealed record CompanyName
         {
             throw new InvalidValueException(typeof(CompanyName), value);
         }
-        
+
         Value = value;
     }
 

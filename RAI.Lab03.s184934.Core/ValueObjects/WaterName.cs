@@ -4,7 +4,7 @@ namespace RAI.Lab03.s184934.Core.ValueObjects;
 
 public sealed record WaterName
 {
-    private string Value { get; }
+    public string Value { get; }
     public const int MinLength = 3;
     public const int MaxLength = 50;
 
@@ -19,7 +19,7 @@ public sealed record WaterName
         {
             throw new InvalidWaterNameLengthException(value.Length);
         }
-        
+
         Value = value;
     }
 

@@ -1,0 +1,56 @@
+﻿@page
+@model RAI.Lab03.s184934.Web.Pages.Companies.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Type
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Companies[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Companies[0].PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Companies[0].Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Companies)
+        {
+        <tr>
+            <td>
+                @item.GetType().Name
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name.Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber.Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email.Address)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id.Value">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id.Value">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id.Value">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

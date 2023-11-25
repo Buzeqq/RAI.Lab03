@@ -5,9 +5,9 @@ namespace RAI.Lab03.s184934.Core.Entities;
 public abstract class Company
 {
     public Id Id { get; private set; }
-    public CompanyName Name { get; private set; }
-    public PhoneNumber PhoneNumber { get; private set; }
-    public Email Email { get; private set; }
+    public CompanyName Name { get; set; }
+    public PhoneNumber PhoneNumber { get; set; }
+    public Email Email { get; set; }
 
     protected Company(Id id, CompanyName name, PhoneNumber phoneNumber, Email email)
     {

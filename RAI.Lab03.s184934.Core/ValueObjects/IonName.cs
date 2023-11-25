@@ -4,7 +4,7 @@ namespace RAI.Lab03.s184934.Core.ValueObjects;
 
 public sealed record IonName
 {
-    private string Value { get; }
+    public string Value { get; }
 
     public IonName(string value)
     {
@@ -12,7 +12,7 @@ public sealed record IonName
         {
             throw new InvalidValueException(typeof(WaterTypeName), value);
         }
-        
+
         Value = value;
     }
 

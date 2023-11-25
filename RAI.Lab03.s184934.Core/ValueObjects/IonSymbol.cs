@@ -4,7 +4,7 @@ namespace RAI.Lab03.s184934.Core.ValueObjects;
 
 public sealed record IonSymbol
 {
-    private string Value { get; }
+    public string Value { get; }
 
     public IonSymbol(string value)
     {
@@ -12,7 +12,7 @@ public sealed record IonSymbol
         {
             throw new InvalidValueException(typeof(WaterTypeName), value);
         }
-        
+
         Value = value;
     }
 

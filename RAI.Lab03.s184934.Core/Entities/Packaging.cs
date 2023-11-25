@@ -1,13 +1,15 @@
 using RAI.Lab03.s184934.Core.Exceptions;
+using RAI.Lab03.s184934.Core.ValueObjects;
 
 namespace RAI.Lab03.s184934.Core.Entities;
 
 public sealed class Packaging
 {
+    public Id Id { get; private set; }
     public string Name { get; private set; }
     public float Volume { get; private set; }
 
-    public Packaging(string name, float volume)
+    public Packaging(Id id, string name, float volume)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
@@ -18,7 +20,8 @@ public sealed class Packaging
         {
             throw new InvalidVolumeException(volume);
         }
-        
+
+        Id = id;
         Name = name;
         Volume = volume;
     }

@@ -1,5 +1,6 @@
 using RAI.Lab03.s184934.Core.Entities;
 using RAI.Lab03.s184934.Core.Enums;
+using RAI.Lab03.s184934.Core.ValueObjects;
 
 namespace RAI.Lab03.s184934.Core;
 
