@@ -17,21 +17,14 @@ internal class EditModel : PageModel
         _context = context;
     }
 
-    [BindProperty]
-    public WaterTypeDto WaterType { get; set; } = default!;
+    [BindProperty] public WaterTypeDto WaterType { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(Guid id)
     {
-        if (id == Guid.Empty)
-        {
-            return NotFound();
-        }
+        if (id == Guid.Empty) return NotFound();
 
         var watertype = await _context.WaterTypes.FirstOrDefaultAsync(m => m.Id == (Id)id);
-        if (watertype == null)
-        {
-            return NotFound();
-        }
+        if (watertype == null) return NotFound();
         WaterType = new WaterTypeDto(watertype.Id, watertype.Name);
         return Page();
     }
@@ -40,10 +33,7 @@ internal class EditModel : PageModel
     // For more details, see https://aka.ms/RazorPagesCRUD.
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
-        {
-            return Page();
-        }
+        if (!ModelState.IsValid) return Page();
 
         var waterType = new WaterType(WaterType.Id, WaterType.Name);
         _context.Attach(waterType).State = EntityState.Modified;
@@ -54,10 +44,7 @@ internal class EditModel : PageModel
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!WaterTypeExists(WaterType.Id))
-            {
-                return NotFound();
-            }
+            if (!WaterTypeExists(WaterType.Id)) return NotFound();
 
             throw;
         }

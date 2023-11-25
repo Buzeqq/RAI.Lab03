@@ -1,5 +1,5 @@
 ﻿@page
-@model RAI.Lab03.s184934.Web.Pages.Companies.IndexModel
+@model IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -13,25 +13,25 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                Type
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Companies[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Companies[0].PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Companies[0].Email)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            Type
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Companies[0].Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Companies[0].PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Companies[0].Email)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Companies)
-        {
+    @foreach (var item in Model.Companies)
+    {
         <tr>
             <td>
                 @item.GetType().Name
@@ -51,6 +51,6 @@
                 <a asp-page="./Delete" asp-route-id="@item.Id.Value">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

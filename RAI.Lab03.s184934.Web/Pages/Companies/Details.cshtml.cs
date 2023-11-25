@@ -5,36 +5,30 @@ using RAI.Lab03.s184934.Core.ValueObjects;
 using RAI.Lab03.s184934.Web.Data;
 using RAI.Lab03.s184934.Web.Data.DTO.Company;
 
-namespace RAI.Lab03.s184934.Web.Pages.Companies
+namespace RAI.Lab03.s184934.Web.Pages.Companies;
+
+public class DetailsModel : PageModel
 {
-    public class DetailsModel : PageModel
+    private readonly ApplicationDbContext _context;
+
+    public DetailsModel(ApplicationDbContext context)
     {
-        private readonly ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public DetailsModel(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+    public CompanyDto DetailsCompany { get; set; } = default!;
 
-        public CompanyDto DetailsCompany { get; set; } = default!;
+    public async Task<IActionResult> OnGetAsync(Guid id)
+    {
+        if (id == Guid.Empty) return NotFound();
 
-        public async Task<IActionResult> OnGetAsync(Guid id)
-        {
-            if (id == Guid.Empty)
-            {
-                return NotFound();
-            }
+        var company = await _context.Companies
+            .FirstOrDefaultAsync(m => m.Id == new Id(id));
 
-            var company = await _context.Companies
-                .FirstOrDefaultAsync(m => m.Id == new Id(id));
-            
-            if (company is null)
-            {
-                return NotFound();
-            }
+        if (company is null) return NotFound();
 
-            DetailsCompany = new CompanyDto(company.Id, company.Name, company.PhoneNumber, company.Email, company.GetCompanyType());
-            return Page();
-        }
+        DetailsCompany = new CompanyDto(company.Id, company.Name, company.PhoneNumber, company.Email,
+            company.GetCompanyType());
+        return Page();
     }
 }

@@ -15,22 +15,18 @@ internal class CreateModel : PageModel
         _context = context;
     }
 
+    [BindProperty] public WaterTypeDto WaterType { get; set; } = default!;
+
     public IActionResult OnGet()
     {
         return Page();
     }
 
-    [BindProperty]
-    public WaterTypeDto WaterType { get; set; } = default!;
-
 
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
-        {
-            return Page();
-        }
+        if (!ModelState.IsValid) return Page();
 
         var waterType = new WaterType(Guid.NewGuid(), WaterType.Name);
 

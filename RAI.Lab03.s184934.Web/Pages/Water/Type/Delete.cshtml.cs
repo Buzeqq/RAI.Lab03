@@ -5,52 +5,41 @@ using RAI.Lab03.s184934.Core.ValueObjects;
 using RAI.Lab03.s184934.Web.Data;
 using RAI.Lab03.s184934.Web.Data.DTO.WaterType;
 
-namespace RAI.Lab03.s184934.Web.Pages.Water.Type
+namespace RAI.Lab03.s184934.Web.Pages.Water.Type;
+
+public class DeleteModel : PageModel
 {
-    public class DeleteModel : PageModel
+    private readonly ApplicationDbContext _context;
+
+    public DeleteModel(ApplicationDbContext context)
     {
-        private readonly ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public DeleteModel(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+    [BindProperty] public WaterTypeDto WaterType { get; set; } = default!;
 
-        [BindProperty]
-        public WaterTypeDto WaterType { get; set; } = default!;
+    public async Task<IActionResult> OnGetAsync(Guid id)
+    {
+        if (id == Guid.Empty) return NotFound();
 
-        public async Task<IActionResult> OnGetAsync(Guid id)
-        {
-            if (id == Guid.Empty)
-            {
-                return NotFound();
-            }
+        var waterType = await _context.WaterTypes.FirstOrDefaultAsync(m => m.Id == new Id(id));
 
-            var waterType = await _context.WaterTypes.FirstOrDefaultAsync(m => m.Id == new Id(id));
+        if (waterType == null) return NotFound();
 
-            if (waterType == null)
-            {
-                return NotFound();
-            }
+        WaterType = new WaterTypeDto(waterType.Id, waterType.Name);
+        return Page();
+    }
 
-            WaterType = new WaterTypeDto(waterType.Id, waterType.Name);
-            return Page();
-        }
+    public async Task<IActionResult> OnPostAsync(Guid id)
+    {
+        if (id == Guid.Empty) return NotFound();
+        var waterType = await _context.WaterTypes.FindAsync(new Id(id));
 
-        public async Task<IActionResult> OnPostAsync(Guid id)
-        {
-            if (id == Guid.Empty)
-            {
-                return NotFound();
-            }
-            var waterType = await _context.WaterTypes.FindAsync(new Id(id));
+        if (waterType == null) return RedirectToPage("./Index");
 
-            if (waterType == null) return RedirectToPage("./Index");
-            
-            _context.WaterTypes.Remove(waterType);
-            await _context.SaveChangesAsync();
+        _context.WaterTypes.Remove(waterType);
+        await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
-        }
+        return RedirectToPage("./Index");
     }
 }

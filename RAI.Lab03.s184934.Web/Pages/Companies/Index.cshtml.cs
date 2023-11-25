@@ -18,9 +18,6 @@ public class IndexModel : PageModel
 
     public async Task OnGetAsync()
     {
-        if (_context.Companies != null)
-        {
-            Companies = await _context.Companies.ToListAsync();
-        }
+        if (_context.Companies != null) Companies = await _context.Companies.ToListAsync();
     }
 }

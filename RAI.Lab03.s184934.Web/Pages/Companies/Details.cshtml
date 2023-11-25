@@ -1,5 +1,5 @@
 ﻿@page
-@model RAI.Lab03.s184934.Web.Pages.Companies.DetailsModel
+@model DetailsModel
 
 @{
     ViewData["Title"] = "Details";
@@ -11,7 +11,7 @@
 <div>
     <h4>Company</h4>
     <h5>@Html.DisplayFor(model => model.DetailsCompany.Type)</h5>
-    <hr />
+    <hr/>
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DetailsCompany.Name)

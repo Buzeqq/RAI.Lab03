@@ -1,38 +1,35 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using RAI.Lab03.s184934.Web.Data;
+using RAI.Lab03.s184934.Web.Data.DTO.Ion;
 
-namespace RAI.Lab03.s184934.Web.Pages.Ion
+namespace RAI.Lab03.s184934.Web.Pages.Ion;
+
+public class CreateModel : PageModel
 {
-    public class CreateModel : PageModel
+    private readonly ApplicationDbContext _context;
+
+    public CreateModel(ApplicationDbContext context)
     {
-        private readonly Data.ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public CreateModel(Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
+    [BindProperty] public IonDto Ion { get; set; } = default!;
 
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
+    public IActionResult OnGet()
+    {
+        return Page();
+    }
 
-        [BindProperty]
-        public Core.Entities.Ion Ion { get; set; } = default!;
-        
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
-        {
-          if (!ModelState.IsValid || _context.Ion == null || Ion == null)
-            {
-                return Page();
-            }
+    // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid) return Page();
 
-            _context.Ion.Add(Ion);
-            await _context.SaveChangesAsync();
+        _context.Ion.Add(Ion.AsIon(Guid.NewGuid()));
+        await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
-        }
+        return RedirectToPage("./Index");
     }
 }

@@ -1,4 +1,5 @@
 @page
+@using RAI.Lab03.s184934.Web.Data.DTO.Ion
 @model RAI.Lab03.s184934.Web.Pages.Ion.CreateModel
 
 @{
@@ -9,33 +10,33 @@
 <h1>Create</h1>
 
 <h4>Ion</h4>
-<hr />
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Ion.Id" class="control-label"></label>
-                <input asp-for="Ion.Id" class="form-control" />
-                <span asp-validation-for="Ion.Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Ion.Name" class="control-label"></label>
-                <input asp-for="Ion.Name" class="form-control" />
+                <input asp-for="Ion.Name" class="form-control"/>
                 <span asp-validation-for="Ion.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Ion.Symbol" class="control-label"></label>
-                <input asp-for="Ion.Symbol" class="form-control" />
+                <input asp-for="Ion.Symbol" class="form-control"/>
                 <span asp-validation-for="Ion.Symbol" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Ion.Content" class="control-label"></label>
-                <input asp-for="Ion.Content" class="form-control" />
+                <input asp-for="Ion.Content" class="form-control"/>
                 <span asp-validation-for="Ion.Content" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="Ion.Type" class="control-label">Type</label>
+                <select asp-for="Ion.Type" asp-items="Html.GetEnumSelectList<IonType>()">
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary"/>
             </div>
         </form>
     </div>
@@ -44,4 +45,3 @@
 <div>
     <a asp-page="Index">Back to List</a>
 </div>
-

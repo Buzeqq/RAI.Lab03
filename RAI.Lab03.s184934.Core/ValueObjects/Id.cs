@@ -4,18 +4,22 @@ namespace RAI.Lab03.s184934.Core.ValueObjects;
 
 public sealed record Id
 {
-    public Guid Value { get; }
-
     public Id(Guid value)
     {
-        if (value == Guid.Empty)
-        {
-            throw new EmptyIdException();
-        }
+        if (value == Guid.Empty) throw new EmptyIdException();
 
         Value = value;
     }
 
-    public static implicit operator Guid(Id id) => id.Value;
-    public static implicit operator Id(Guid value) => new(value);
+    public Guid Value { get; }
+
+    public static implicit operator Guid(Id id)
+    {
+        return id.Value;
+    }
+
+    public static implicit operator Id(Guid value)
+    {
+        return new Id(value);
+    }
 }

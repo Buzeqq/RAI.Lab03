@@ -1,5 +1,5 @@
 @page
-@model RAI.Lab03.s184934.Web.Pages.Ion.DetailsModel
+@model DetailsModel
 
 @{
     ViewData["Title"] = "Details";
@@ -9,8 +9,9 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Ion</h4>
-    <hr />
+    <h4>@Html.DisplayFor(m => m.Ion.GetType())</h4>
+    <h5>@Html.DisplayFor(model => model.Ion.Type)</h5>
+    <hr/>
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Ion.Name)

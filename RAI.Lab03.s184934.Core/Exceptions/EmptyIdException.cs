@@ -4,6 +4,5 @@ public sealed class EmptyIdException : WaterWarehouseException
 {
     public EmptyIdException() : base("The id was empty")
     {
-        
     }
 }

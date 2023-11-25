@@ -9,29 +9,29 @@
 <h1>Edit</h1>
 
 <h4>Company</h4>
-<hr />
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CompanyDto.Id" />
+            <input type="hidden" asp-for="CompanyDto.Id"/>
             <div class="form-group">
                 <label asp-for="CompanyDto.Name" class="control-label"></label>
-                <input asp-for="CompanyDto.Name" class="form-control" />
+                <input asp-for="CompanyDto.Name" class="form-control"/>
                 <span asp-validation-for="CompanyDto.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CompanyDto.PhoneNumber" class="control-label"></label>
-                <input asp-for="CompanyDto.PhoneNumber" class="form-control" />
+                <input asp-for="CompanyDto.PhoneNumber" class="form-control"/>
                 <span asp-validation-for="CompanyDto.PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CompanyDto.Email" class="control-label"></label>
-                <input asp-for="CompanyDto.Email" class="form-control" />
+                <input asp-for="CompanyDto.Email" class="form-control"/>
                 <span asp-validation-for="CompanyDto.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary"/>
             </div>
         </form>
     </div>
@@ -42,5 +42,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

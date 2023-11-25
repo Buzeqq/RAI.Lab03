@@ -4,18 +4,22 @@ namespace RAI.Lab03.s184934.Core.ValueObjects;
 
 public sealed record CompanyName
 {
-    public string Value { get; }
-
     public CompanyName(string value)
     {
-        if (string.IsNullOrWhiteSpace(value))
-        {
-            throw new InvalidValueException(typeof(CompanyName), value);
-        }
+        if (string.IsNullOrWhiteSpace(value)) throw new InvalidValueException(typeof(CompanyName), value);
 
         Value = value;
     }
 
-    public static implicit operator string(CompanyName name) => name.Value;
-    public static implicit operator CompanyName(string name) => new(name);
+    public string Value { get; }
+
+    public static implicit operator string(CompanyName name)
+    {
+        return name.Value;
+    }
+
+    public static implicit operator CompanyName(string name)
+    {
+        return new CompanyName(name);
+    }
 }

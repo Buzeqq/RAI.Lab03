@@ -1,5 +1,5 @@
 @page
-@model RAI.Lab03.s184934.Web.Pages.Ion.IndexModel
+@model IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -13,22 +13,29 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Ion[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ion[0].Symbol)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ion[0].Content)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            Type
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ion[0].Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ion[0].Symbol)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ion[0].Content)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Ion) {
+    @foreach (var item in Model.Ion)
+    {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -44,6 +51,6 @@
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

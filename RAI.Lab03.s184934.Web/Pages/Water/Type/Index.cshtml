@@ -1,5 +1,5 @@
 ﻿@page
-@model RAI.Lab03.s184934.Web.Pages.Water.Type.IndexModel
+@model IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -13,15 +13,16 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.WaterType[0].Name)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.WaterType[0].Name)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.WaterType) {
+    @foreach (var item in Model.WaterType)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name.Value)
@@ -32,6 +33,6 @@
                 <a asp-page="./Delete" asp-route-id="@item.Id.Value">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

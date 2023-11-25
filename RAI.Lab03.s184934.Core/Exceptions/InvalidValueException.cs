@@ -6,6 +6,5 @@ public sealed class InvalidValueException : WaterWarehouseException
 {
     public InvalidValueException(MemberInfo type, string value) : base($"Invalid {type.Name} value: [{value}]")
     {
-        
     }
 }

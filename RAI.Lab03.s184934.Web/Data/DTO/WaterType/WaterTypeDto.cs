@@ -14,8 +14,7 @@ public sealed class WaterTypeDto
         this.Name = Name;
     }
 
-    [Required]
-    public Guid Id { get; init; }
-    [StringLength(20, MinimumLength = 3)]
-    public string Name { get; init; }
+    [Required] public Guid Id { get; init; }
+
+    [StringLength(20, MinimumLength = 3)] public string Name { get; init; }
 }

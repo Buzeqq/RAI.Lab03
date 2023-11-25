@@ -33,7 +33,7 @@ internal sealed class MineralWaterConfiguration : IEntityTypeConfiguration<Miner
 
         builder
             .Property(x => x.Ph)
-            .HasConversion(x => x.Value, x => new(x))
+            .HasConversion(x => x.Value, x => new PhValue(x))
             .IsRequired();
 
         builder
@@ -79,17 +79,17 @@ internal sealed class IonConfiguration : IEntityTypeConfiguration<Ion>
 
         builder
             .Property(x => x.Name)
-            .HasConversion(x => x.Value, x => new(x))
+            .HasConversion(x => x.Value, x => new IonName(x))
             .IsRequired();
 
         builder
             .Property(x => x.Symbol)
-            .HasConversion(x => x.Value, x => new(x))
+            .HasConversion(x => x.Value, x => new IonSymbol(x))
             .IsRequired();
 
         builder
             .Property(x => x.Content)
-            .HasConversion(x => x.Content, x => new(x))
+            .HasConversion(x => x.Content, x => new ContentInGramsPerLiter(x))
             .IsRequired();
 
         builder
@@ -123,17 +123,17 @@ internal sealed class CompanyConfiguration : IEntityTypeConfiguration<Company>
 
         builder
             .Property(x => x.Name)
-            .HasConversion(x => x.Value, x => new(x))
+            .HasConversion(x => x.Value, x => new CompanyName(x))
             .IsRequired();
 
         builder
             .Property(x => x.PhoneNumber)
-            .HasConversion(x => x.Value, x => new(x))
+            .HasConversion(x => x.Value, x => new PhoneNumber(x))
             .IsRequired();
 
         builder
             .Property(x => x.Email)
-            .HasConversion(x => x.Address, x => new(x))
+            .HasConversion(x => x.Address, x => new Email(x))
             .IsRequired();
 
         builder
@@ -150,4 +150,3 @@ internal sealed class IdValueConverter : ValueConverter<Id, Guid>
     {
     }
 }
-

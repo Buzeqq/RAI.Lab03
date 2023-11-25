@@ -4,6 +4,5 @@ public class WaterWarehouseException : Exception
 {
     public WaterWarehouseException(string message) : base(message)
     {
-        
     }
 }

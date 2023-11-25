@@ -2,55 +2,44 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RAI.Lab03.s184934.Core.ValueObjects;
+using RAI.Lab03.s184934.Web.Data;
+using RAI.Lab03.s184934.Web.Data.DTO.Ion;
 
-namespace RAI.Lab03.s184934.Web.Pages.Ion
+namespace RAI.Lab03.s184934.Web.Pages.Ion;
+
+public class DeleteModel : PageModel
 {
-    public class DeleteModel : PageModel
+    private readonly ApplicationDbContext _context;
+
+    public DeleteModel(ApplicationDbContext context)
     {
-        private readonly Data.ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public DeleteModel(Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
+    [BindProperty] public IonDto Ion { get; set; } = default!;
 
-        [BindProperty]
-      public Core.Entities.Ion Ion { get; set; } = default!;
+    public async Task<IActionResult> OnGetAsync(Guid id)
+    {
+        if (id == Guid.Empty) return NotFound();
 
-        public async Task<IActionResult> OnGetAsync(Id id)
-        {
-            if (id == null || _context.Ion == null)
-            {
-                return NotFound();
-            }
+        var ion = await _context.Ion.FirstOrDefaultAsync(m => m.Id == new Id(id));
 
-            var ion = await _context.Ion.FirstOrDefaultAsync(m => m.Id == id);
+        if (ion is null) return NotFound();
 
-            if (ion == null)
-            {
-                return NotFound();
-            }
+        Ion = ion.AsDto();
+        return Page();
+    }
 
-            Ion = ion;
-            return Page();
-        }
+    public async Task<IActionResult> OnPostAsync(Guid id)
+    {
+        if (id == Guid.Empty) return NotFound();
+        var ion = await _context.Ion.FindAsync(new Id(id));
 
-        public async Task<IActionResult> OnPostAsync(Id id)
-        {
-            if (id == null || _context.Ion == null)
-            {
-                return NotFound();
-            }
-            var ion = await _context.Ion.FindAsync(id);
+        if (ion is null) return RedirectToPage("./Index");
 
-            if (ion != null)
-            {
-                Ion = ion;
-                _context.Ion.Remove(Ion);
-                await _context.SaveChangesAsync();
-            }
+        _context.Ion.Remove(ion);
+        await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
-        }
+        return RedirectToPage("./Index");
     }
 }

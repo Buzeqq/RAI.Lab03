@@ -1,22 +1,19 @@
-using RAI.Lab03.s184934.Core.Exceptions;
 using System.Text.RegularExpressions;
+using RAI.Lab03.s184934.Core.Exceptions;
 
 namespace RAI.Lab03.s184934.Core.ValueObjects;
 
 public partial record Email
 {
-    public string Address { get; }
-
     public Email(string address)
     {
         address = address.Trim();
-        if (!IsValidEmail(address))
-        {
-            throw new InvalidValueException(typeof(Email), address);
-        }
+        if (!IsValidEmail(address)) throw new InvalidValueException(typeof(Email), address);
 
         Address = address;
     }
+
+    public string Address { get; }
 
     private static bool IsValidEmail(string email)
     {
@@ -28,6 +25,13 @@ public partial record Email
     [GeneratedRegex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")]
     private static partial Regex EmailRegex();
 
-    public static implicit operator Email(string email) => new(email);
-    public static implicit operator string(Email email) => email.Address;
+    public static implicit operator Email(string email)
+    {
+        return new Email(email);
+    }
+
+    public static implicit operator string(Email email)
+    {
+        return email.Address;
+    }
 }

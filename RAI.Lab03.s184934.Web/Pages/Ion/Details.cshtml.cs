@@ -2,35 +2,30 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RAI.Lab03.s184934.Core.ValueObjects;
+using RAI.Lab03.s184934.Web.Data;
+using RAI.Lab03.s184934.Web.Data.DTO.Ion;
 
-namespace RAI.Lab03.s184934.Web.Pages.Ion
+namespace RAI.Lab03.s184934.Web.Pages.Ion;
+
+public class DetailsModel : PageModel
 {
-    public class DetailsModel : PageModel
+    private readonly ApplicationDbContext _context;
+
+    public DetailsModel(ApplicationDbContext context)
     {
-        private readonly Data.ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public DetailsModel(Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
+    public IonDto Ion { get; set; } = default!;
 
-      public Core.Entities.Ion Ion { get; set; } = default!; 
+    public async Task<IActionResult> OnGetAsync(Guid id)
+    {
+        if (id == Guid.Empty) return NotFound();
 
-        public async Task<IActionResult> OnGetAsync(Id id)
-        {
-            if (id == null || _context.Ion == null)
-            {
-                return NotFound();
-            }
+        var ion = await _context.Ion.FirstOrDefaultAsync(m => m.Id == new Id(id));
+        if (ion == null) return NotFound();
 
-            var ion = await _context.Ion.FirstOrDefaultAsync(m => m.Id == id);
-            if (ion == null)
-            {
-                return NotFound();
-            }
-
-            Ion = ion;
-            return Page();
-        }
+        Ion = ion.AsDto();
+        return Page();
     }
 }
