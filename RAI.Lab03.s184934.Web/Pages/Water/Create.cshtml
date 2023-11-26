@@ -1,0 +1,88 @@
+@page
+@model RAI.Lab03.s184934.Web.Pages.Water.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>MineralWater</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MineralWater.Name" class="control-label"></label>
+                <input asp-for="MineralWater.Name" class="form-control"/>
+                <span asp-validation-for="MineralWater.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MineralWater.Ph" class="control-label"></label>
+                <input asp-for="MineralWater.Ph" class="form-control"/>
+                <span asp-validation-for="MineralWater.Ph" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MineralWater.ImagePath" class="control-label"></label>
+                <input asp-for="MineralWater.ImagePath" class="form-control"/>
+                <span asp-validation-for="MineralWater.ImagePath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MineralWater.Type" class="control-label">Type</label>
+                <select asp-for="MineralWater.Type" asp-items="@(new SelectList(Model.AvailableWaterTypes, "Id", "Name"))">
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MineralWater.Anions" class="control-label">Anions</label>
+                <select multiple="multiple" class="multiselect" asp-for="MineralWater.Anions" asp-items="@(new SelectList(Model.AvailableAnions, "Id", "Name"))">
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MineralWater.Cations" class="control-label">Cations</label>
+                <select multiple="multiple" class="multiselect" asp-for="MineralWater.Cations" asp-items="@(new SelectList(Model.AvailableCations, "Id", "Name"))">
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MineralWater.Producer" class="control-label">Producer</label>
+                @if (Model.AvailableProducers.Any())
+                {
+                    <select asp-for="MineralWater.Producer" asp-items="@(new SelectList(Model.AvailableProducers, "Id", "Name"))">
+                    </select>
+                }
+                else
+                {
+                    <p>No producers available!</p>
+                }
+            </div>
+            <div class="form-group">
+                <label asp-for="MineralWater.Packaging" class="control-label">Packaging</label>
+                <select asp-for="MineralWater.Packaging" asp-items="@(new SelectList(Model.AvailablePackaging, "Id", "DisplayInformation"))">
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(() => {
+            $(".multiselect").multiselect({
+                templates: {
+                    button: '<button type="button" class="multiselect dropdown-toggle btn btn-primary" data-bs-toggle="dropdown" aria-expanded="false"><span class="multiselect-selected-text"></span></button>',
+                },
+            });
+        });
+    </script>
+}
+
+

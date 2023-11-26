@@ -3,22 +3,21 @@ using Microsoft.EntityFrameworkCore;
 using RAI.Lab03.s184934.Web.Data;
 using RAI.Lab03.s184934.Web.Data.DTO.Packaging;
 
-namespace RAI.Lab03.s184934.Web.Pages.Packaging
+namespace RAI.Lab03.s184934.Web.Pages.Packaging;
+
+public class IndexModel : PageModel
 {
-    public class IndexModel : PageModel
+    private readonly ApplicationDbContext _context;
+
+    public IndexModel(ApplicationDbContext context)
     {
-        private readonly ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public IndexModel(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+    public IList<PackagingDto> PackagingDtos { get;set; } = default!;
 
-        public IList<PackagingDto> PackagingDtos { get;set; } = default!;
-
-        public async Task OnGetAsync()
-        {
-            PackagingDtos = await _context.Packaging.Select(p => p.AsDto()).ToListAsync();
-        }
+    public async Task OnGetAsync()
+    {
+        PackagingDtos = await _context.Packaging.Select(p => p.AsDto()).ToListAsync();
     }
 }

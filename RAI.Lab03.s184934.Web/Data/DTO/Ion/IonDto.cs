@@ -7,11 +7,19 @@ public sealed class IonDto
 {
     public Guid Id { get; init; }
 
-    [StringLength(20, MinimumLength = 3)] public string Name { get; init; }
+    [Required]
+    [StringLength(20, MinimumLength = 3)] 
+    public string Name { get; init; }
 
-    [StringLength(10, MinimumLength = 2)] public string Symbol { get; init; }
+    [Required]
+    [StringLength(10, MinimumLength = 2)]
+    public string Symbol { get; init; }
+    
+    [Required]
     [DisplayFormat(DataFormatString = "{0:e}", ApplyFormatInEditMode = true)]
     public decimal Content { get; init; }
+    
+    [Required]
     public IonType Type { get; init; }
 
     public Core.Entities.Ion AsIon(Guid id)

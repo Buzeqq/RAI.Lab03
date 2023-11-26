@@ -11,7 +11,7 @@ public class ApplicationDbContext : IdentityDbContext
     {
     }
 
-    public DbSet<MineralWater> MineralWaters { get; }
+    public DbSet<MineralWater> MineralWaters { get; set; }
     public DbSet<Ion> Ion { get; set; }
     public DbSet<Cation> Cations { get; set; }
     public DbSet<Anion> Anions { get; set; }

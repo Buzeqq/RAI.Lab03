@@ -11,6 +11,8 @@ public sealed record PhValue
     public PhValue(float value)
     {
         if (value is < MinValue or > MaxValue) throw new InvalidPhValueException(value);
+
+        Value = value;
     }
 
     public float Value { get; }

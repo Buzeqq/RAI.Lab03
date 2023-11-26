@@ -1,0 +1,71 @@
+@page
+@model RAI.Lab03.s184934.Web.Pages.Water.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Image</th>
+        <th>
+            @Html.DisplayNameFor(model => model.MineralWaterDtos[0].Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MineralWaterDtos[0].Producer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MineralWaterDtos[0].Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MineralWaterDtos[0].Ph)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MineralWaterDtos[0].Mineralization)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MineralWaterDtos[0].Packaging)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.MineralWaterDtos) {
+    <tr>
+        <td>
+            <img class="mh-100px" src="@item.ImagePath" alt="water image"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Model.Producers.Single(p => p.Id.Equals(item.Producer)).Name
+        </td>
+        <td>
+            @Model.Types.Single(p => p.Id.Equals(item.Type)).Name
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ph)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mineralization)
+        </td>
+        <td>
+            @Model.Packaging.Single(p => p.Id.Equals(item.Packaging)).DisplayInformation
+        </td>
+        <td>
+            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+            <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+        </td>
+    </tr>
+}
+    </tbody>
+</table>

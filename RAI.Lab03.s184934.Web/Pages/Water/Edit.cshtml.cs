@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using RAI.Lab03.s184934.Core.Entities;
 using RAI.Lab03.s184934.Core.ValueObjects;
 using RAI.Lab03.s184934.Web.Data;
-using RAI.Lab03.s184934.Web.Data.DTO.Packaging;
 
-namespace RAI.Lab03.s184934.Web.Pages.Packaging;
+namespace RAI.Lab03.s184934.Web.Pages.Water;
 
 public class EditModel : PageModel
 {
@@ -17,7 +17,7 @@ public class EditModel : PageModel
     }
 
     [BindProperty]
-    public PackagingDto PackagingDto { get; set; } = default!;
+    public MineralWater MineralWaterDto { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(Guid id)
     {
@@ -26,12 +26,12 @@ public class EditModel : PageModel
             return NotFound();
         }
 
-        var packaging =  await _context.Packaging.FirstOrDefaultAsync(m => m.Id == new Id(id));
-        if (packaging is null)
+        var mineralWater =  await _context.MineralWaters.FirstOrDefaultAsync(m => m.Id == new Id(id));
+        if (mineralWater == null)
         {
             return NotFound();
         }
-        PackagingDto = packaging.AsDto();
+        MineralWaterDto = mineralWater;
         return Page();
     }
 
@@ -44,7 +44,7 @@ public class EditModel : PageModel
             return Page();
         }
 
-        _context.Attach(PackagingDto.AsPackaging(PackagingDto.Id)).State = EntityState.Modified;
+        _context.Attach(MineralWaterDto).State = EntityState.Modified;
 
         try
         {
@@ -52,7 +52,7 @@ public class EditModel : PageModel
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!PackagingExists(PackagingDto.Id))
+            if (!MineralWaterExists(MineralWaterDto.Id))
             {
                 return NotFound();
             }
@@ -63,8 +63,8 @@ public class EditModel : PageModel
         return RedirectToPage("./Index");
     }
 
-    private bool PackagingExists(Id id)
+    private bool MineralWaterExists(Id id)
     {
-        return (_context.Packaging?.Any(e => e.Id == id)).GetValueOrDefault();
+        return (_context.MineralWaters?.Any(e => e.Id == id)).GetValueOrDefault();
     }
 }

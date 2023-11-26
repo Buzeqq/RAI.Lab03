@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RAI.Lab03.s184934.Core.ValueObjects;
 using RAI.Lab03.s184934.Web.Data;
-using RAI.Lab03.s184934.Web.Data.DTO.Packaging;
+using RAI.Lab03.s184934.Web.Data.DTO.MineralWater;
 
-namespace RAI.Lab03.s184934.Web.Pages.Packaging;
+namespace RAI.Lab03.s184934.Web.Pages.Water;
 
 public class DetailsModel : PageModel
 {
@@ -16,7 +16,7 @@ public class DetailsModel : PageModel
         _context = context;
     }
 
-    public PackagingDto PackagingDto { get; set; } = default!; 
+    public MineralWaterDto MineralWaterDto { get; set; } = default!; 
 
     public async Task<IActionResult> OnGetAsync(Guid id)
     {
@@ -25,13 +25,13 @@ public class DetailsModel : PageModel
             return NotFound();
         }
 
-        var packaging = await _context.Packaging.FirstOrDefaultAsync(m => m.Id == new Id(id));
-        if (packaging is null)
+        var mineralWater = await _context.MineralWaters.FirstOrDefaultAsync(m => m.Id == new Id(id));
+        if (mineralWater is null)
         {
             return NotFound();
         }
 
-        PackagingDto = packaging.AsDto();
+        MineralWaterDto = mineralWater.AsDto();
         return Page();
     }
 }
