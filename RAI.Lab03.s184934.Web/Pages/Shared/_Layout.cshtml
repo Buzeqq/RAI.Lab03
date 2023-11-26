@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -23,9 +26,22 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                    </li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="dropdown">
+                            <button class="nav-item btn dropdown-toggle" type="button" id="dropdownMenuButton" 
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Warehouse
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" asp-area="" asp-page="/Water/Index">Water</a>
+                                <a class="dropdown-item" asp-area="" asp-page="/Water/Type/Index">Water type</a>
+                                <a class="dropdown-item" asp-area="" asp-page="/Company/Index">Company</a>
+                                <a class="dropdown-item" asp-area="" asp-page="/Ion/Index">Ion</a>
+                                <a class="dropdown-item" asp-area="" asp-page="/Packaging/Index">Packaging</a>
+                            </div>
+                        </li>
+                    }
                 </ul>
                 <partial name="_LoginPartial"/>
             </div>
@@ -50,5 +66,7 @@
 <script src="~/js/site.js" asp-append-version="true"></script>
 
 @await RenderSectionAsync("Scripts", false)
+<script>
+</script>
 </body>
 </html>
