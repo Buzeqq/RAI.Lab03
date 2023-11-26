@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using RAI.Lab03.s184934.Core.Entities;
 using RAI.Lab03.s184934.Web.Data;
 using RAI.Lab03.s184934.Web.Data.DTO.Company;
 using RAI.Lab03.s184934.Web.Data.DTO.MineralWater;
@@ -34,8 +33,8 @@ public class IndexModel : PageModel
             .ToListAsync();
 
         MineralWaterDtos = mineralWaters.Select(m => m.AsDto()).ToList();
-        Producers = mineralWaters.Select(w => w.Producer.AsDto()).Distinct();
-        Packaging = mineralWaters.Select(w => w.Packaging.AsDto()).Distinct();
-        Types = mineralWaters.Select(w => w.Type.AsDto()).Distinct();
+        Producers = mineralWaters.Select(w => w.Producer.AsDto()).DistinctBy(p => p.Id);
+        Packaging = mineralWaters.Select(w => w.Packaging.AsDto()).DistinctBy(p => p.Id);
+        Types = mineralWaters.Select(w => w.Type.AsDto()).DistinctBy(t => t.Id);
     }
 }

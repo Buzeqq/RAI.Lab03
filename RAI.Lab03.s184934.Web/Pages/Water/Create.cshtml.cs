@@ -27,12 +27,12 @@ public class CreateModel : PageModel
 
     public IActionResult OnGet()
     {
-        MineralWater = new MineralWaterDto();
+        MineralWaterDto = new MineralWaterDto();
         return Page();
     }
 
     [BindProperty]
-    public MineralWaterDto MineralWater { get; set; } = default!;
+    public MineralWaterDto MineralWaterDto { get; set; } = default!;
     public IEnumerable<CompanyDto> AvailableProducers { get; set; }
     public IEnumerable<PackagingDto> AvailablePackaging { get; set; }
     public IEnumerable<WaterTypeDto> AvailableWaterTypes { get; set; }
@@ -47,13 +47,13 @@ public class CreateModel : PageModel
             return Page();
         }
 
-        var newWater = MineralWater.AsMineralWater(Guid.NewGuid());
-        newWater.Anions.AddRange(_context.Anions.Where(a => MineralWater.Anions.Contains(a.Id)));
-        newWater.Cations.AddRange(_context.Cations.Where(a => MineralWater.Cations.Contains(a.Id)));
-        newWater.Packaging = (await _context.Packaging.SingleOrDefaultAsync(p => p.Id.Equals(MineralWater.Packaging)))!;
+        var newWater = MineralWaterDto.AsMineralWater(Guid.NewGuid());
+        newWater.Anions.AddRange(_context.Anions.Where(a => MineralWaterDto.Anions.Contains(a.Id)));
+        newWater.Cations.AddRange(_context.Cations.Where(a => MineralWaterDto.Cations.Contains(a.Id)));
+        newWater.Packaging = (await _context.Packaging.SingleOrDefaultAsync(p => p.Id.Equals(MineralWaterDto.Packaging)))!;
         newWater.Producer =
-            (await _context.Producers.SingleOrDefaultAsync(p => p.Id.Equals(MineralWater.Producer)))!;
-        newWater.Type = (await _context.WaterTypes.SingleOrDefaultAsync(t => t.Id.Equals(MineralWater.Type)))!;
+            (await _context.Producers.SingleOrDefaultAsync(p => p.Id.Equals(MineralWaterDto.Producer)))!;
+        newWater.Type = (await _context.WaterTypes.SingleOrDefaultAsync(t => t.Id.Equals(MineralWaterDto.Type)))!;
             
         _context.MineralWaters.Add(newWater);
         await _context.SaveChangesAsync();

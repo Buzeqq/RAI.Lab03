@@ -20,8 +20,9 @@ public sealed class MineralWaterDto
     [Required]
     [Range(0.0, 14.0)]
     public float Ph { get; init; } = PhValue.DefaultValue;
-    public ICollection<Guid> Cations { get; init; }
-    public ICollection<Guid> Anions { get; init; }
+
+    public ICollection<Guid> Cations { get; init; } = new List<Guid>();
+    public ICollection<Guid> Anions { get; init; } = new List<Guid>();
     public string Mineralization { get; init; } = "";
     [Required]
     public Guid Packaging { get; init; }

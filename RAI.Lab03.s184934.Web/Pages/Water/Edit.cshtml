@@ -31,6 +31,38 @@
                 <span asp-validation-for="MineralWaterDto.ImagePath" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="MineralWaterDto.Type" class="control-label">Type</label>
+                <select asp-for="MineralWaterDto.Type" asp-items="@(new SelectList(Model.AvailableWaterTypes, "Id", "Name", Model.MineralWaterDto.Type))">
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MineralWaterDto.Anions" class="control-label">Anions</label>
+                <select multiple="multiple" class="multiselect" asp-for="MineralWaterDto.Anions" asp-items="@(new MultiSelectList(Model.AvailableAnions, "Id", "Name", Model.MineralWaterDto.Anions))">
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MineralWaterDto.Cations" class="control-label">Cations</label>
+                <select multiple="multiple" class="multiselect" asp-for="MineralWaterDto.Cations" asp-items="@(new MultiSelectList(Model.AvailableCations, "Id", "Name", Model.MineralWaterDto.Cations))">
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MineralWaterDto.Producer" class="control-label">Producer</label>
+                @if (Model.AvailableProducers.Any())
+                {
+                    <select asp-for="MineralWaterDto.Producer" asp-items="@(new SelectList(Model.AvailableProducers, "Id", "Name", Model.MineralWaterDto.Producer))">
+                    </select>
+                }
+                else
+                {
+                    <p>No producers available!</p>
+                }
+            </div>
+            <div class="form-group">
+                <label asp-for="MineralWaterDto.Packaging" class="control-label">Packaging</label>
+                <select asp-for="MineralWaterDto.Packaging" asp-items="@(new SelectList(Model.AvailablePackaging, "Id", "DisplayInformation", Model.MineralWaterDto.Packaging))">
+                </select>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
@@ -41,3 +73,15 @@
     <a asp-page="./Index">Back to List</a>
 </div>
 
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(() => {
+            $(".multiselect").multiselect({
+                templates: {
+                    button: '<button type="button" class="multiselect dropdown-toggle btn btn-primary" data-bs-toggle="dropdown" aria-expanded="false"><span class="multiselect-selected-text"></span></button>',
+                },
+            });
+        });
+    </script>
+}

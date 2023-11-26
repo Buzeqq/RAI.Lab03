@@ -17,4 +17,6 @@ public sealed class WaterTypeDto
     [Required] public Guid Id { get; init; }
 
     [StringLength(20, MinimumLength = 3)] public string Name { get; init; }
+
+    public Core.Entities.WaterType AsWaterType(Guid id) => new(id, Name);
 }

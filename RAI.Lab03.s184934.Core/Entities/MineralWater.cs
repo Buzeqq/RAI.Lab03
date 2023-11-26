@@ -18,8 +18,8 @@ public sealed class MineralWater
     public WaterType Type { get; set; }
     public Producer Producer { get; set; }
     public PhValue Ph { get; private set; }
-    public ICollection<Cation> Cations { get; } = new List<Cation>();
-    public ICollection<Anion> Anions { get; } = new List<Anion>();
+    public ICollection<Cation> Cations { get; set; } = new List<Cation>();
+    public ICollection<Anion> Anions { get; set; } = new List<Anion>();
     public Mineralization Mineralization => Cations.Concat<Ion>(Anions).CalculateMineralization();
     public Packaging Packaging { get; set; }
     public string ImagePath { get; private set; }
