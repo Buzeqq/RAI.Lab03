@@ -70,10 +70,10 @@ public static class Extensions
             ImagePath = mineralWater.ImagePath,
             Mineralization = mineralWater.Mineralization.ToString(),
             Name = mineralWater.Name,
-            Packaging = mineralWater.Packaging.Id,
+            Packaging = mineralWater.Packaging?.Id,
             Ph = mineralWater.Ph.Value,
-            Producer = mineralWater.Producer.Id,
-            Type = mineralWater.Type.Id
+            Producer = mineralWater.Producer?.Id,
+            Type = mineralWater.Type?.Id
         };
 
     public static DeliveryDto AsDto(this Delivery delivery) =>

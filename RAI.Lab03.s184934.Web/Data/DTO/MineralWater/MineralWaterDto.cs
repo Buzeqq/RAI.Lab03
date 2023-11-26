@@ -12,20 +12,20 @@ public sealed class MineralWaterDto
     public string Name { get; init; }
     
     [Required]
-    public Guid Type { get; init; }
+    public Guid? Type { get; init; }
     
     [Required]
-    public Guid Producer { get; init; }
+    public Guid? Producer { get; init; }
     
     [Required]
     [Range(0.0, 14.0)]
     public float Ph { get; init; } = PhValue.DefaultValue;
 
-    public ICollection<Guid> Cations { get; init; } = new List<Guid>();
-    public ICollection<Guid> Anions { get; init; } = new List<Guid>();
+    public ICollection<Guid>? Cations { get; init; } = new List<Guid>();
+    public ICollection<Guid>? Anions { get; init; } = new List<Guid>();
     public string Mineralization { get; init; } = "";
     [Required]
-    public Guid Packaging { get; init; }
+    public Guid? Packaging { get; init; }
 
     public string ImagePath { get; set; } = "";
 
