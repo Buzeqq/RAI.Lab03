@@ -26,9 +26,8 @@ public sealed class MineralWaterDto
     public string Mineralization { get; init; } = "";
     [Required]
     public Guid Packaging { get; init; }
-    
-    [Required]
-    public string ImagePath { get; init; }
+
+    public string ImagePath { get; set; } = "";
 
     public MineralWaterDto()
     {

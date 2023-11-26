@@ -14,10 +14,12 @@ namespace RAI.Lab03.s184934.Web.Pages.Water;
 public class CreateModel : PageModel
 {
     private readonly ApplicationDbContext _context;
+    private readonly IWebHostEnvironment _environment;
 
-    public CreateModel(ApplicationDbContext context)
+    public CreateModel(ApplicationDbContext context, IWebHostEnvironment environment)
     {
         _context = context;
+        _environment = environment;
         AvailableWaterTypes = _context.WaterTypes.Select(t => t.AsDto()).ToList();
         AvailableAnions = _context.Anions.Select(a => a.AsDto()).ToList();
         AvailableCations = _context.Cations.Select(c => c.AsDto()).ToList();
@@ -40,13 +42,25 @@ public class CreateModel : PageModel
     public IEnumerable<IonDto> AvailableCations { get; set; }
 
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(IFormFile image)
     {
         if (!ModelState.IsValid)
         {
             return Page();
         }
 
+        var wwwPath = _environment.WebRootPath;
+        var uploadDirectory = Path.Combine(wwwPath, "Upload");
+        if (!Directory.Exists(uploadDirectory))
+        {
+            Directory.CreateDirectory(uploadDirectory);
+        }
+
+        var imagePath = Path.Combine(uploadDirectory, image.FileName);
+        await using var fs = new FileStream(imagePath, FileMode.OpenOrCreate);
+        await image.CopyToAsync(fs);
+
+        MineralWaterDto.ImagePath = Path.Combine("/", Path.GetRelativePath(wwwPath, imagePath));
         var newWater = MineralWaterDto.AsMineralWater(Guid.NewGuid());
         newWater.Anions.AddRange(_context.Anions.Where(a => MineralWaterDto.Anions.Contains(a.Id)));
         newWater.Cations.AddRange(_context.Cations.Where(a => MineralWaterDto.Cations.Contains(a.Id)));
@@ -54,7 +68,6 @@ public class CreateModel : PageModel
         newWater.Producer =
             (await _context.Producers.SingleOrDefaultAsync(p => p.Id.Equals(MineralWaterDto.Producer)))!;
         newWater.Type = (await _context.WaterTypes.SingleOrDefaultAsync(t => t.Id.Equals(MineralWaterDto.Type)))!;
-            
         _context.MineralWaters.Add(newWater);
         await _context.SaveChangesAsync();
 

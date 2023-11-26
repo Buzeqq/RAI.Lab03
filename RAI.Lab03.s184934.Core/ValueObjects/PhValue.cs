@@ -5,8 +5,8 @@ namespace RAI.Lab03.s184934.Core.ValueObjects;
 public sealed record PhValue
 {
     public const float DefaultValue = 7.0f;
-    public const float MinValue = 5.0f;
-    public const float MaxValue = 9.0f;
+    public const float MinValue = 0.0f;
+    public const float MaxValue = 14.0f;
 
     public PhValue(float value)
     {
