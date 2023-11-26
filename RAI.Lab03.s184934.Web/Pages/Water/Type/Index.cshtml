@@ -15,22 +15,22 @@
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.WaterType[0].Name)
+            @Html.DisplayNameFor(model => model.WaterTypeDtos[0].Name)
         </th>
         <th></th>
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model.WaterType)
+    @foreach (var item in Model.WaterTypeDtos)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name.Value)
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id.Value">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id.Value">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id.Value">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
     }

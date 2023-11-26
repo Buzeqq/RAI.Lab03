@@ -8,9 +8,9 @@ namespace RAI.Lab03.s184934.Web.Pages.Water.Type;
 
 internal class CreateModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly WarehouseDbContext _context;
 
-    public CreateModel(ApplicationDbContext context)
+    public CreateModel(WarehouseDbContext context)
     {
         _context = context;
     }

@@ -13,9 +13,9 @@ namespace RAI.Lab03.s184934.Web.Pages.Water;
 
 public class DetailsModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly WarehouseDbContext _context;
 
-    public DetailsModel(ApplicationDbContext context)
+    public DetailsModel(WarehouseDbContext context)
     {
         _context = context;
     }

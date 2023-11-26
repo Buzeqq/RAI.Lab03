@@ -1,23 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using RAI.Lab03.s184934.Core.Entities;
 using RAI.Lab03.s184934.Web.Data;
+using RAI.Lab03.s184934.Web.Data.DTO.WaterType;
 
 namespace RAI.Lab03.s184934.Web.Pages.Water.Type;
 
 public class IndexModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly WarehouseDbContext _context;
 
-    public IndexModel(ApplicationDbContext context)
+    public IndexModel(WarehouseDbContext context)
     {
         _context = context;
     }
 
-    public IList<WaterType> WaterType { get; set; } = default!;
+    public IList<WaterTypeDto> WaterTypeDtos { get; set; } = default!;
 
     public async Task OnGetAsync()
     {
-        if (_context.WaterTypes != null) WaterType = await _context.WaterTypes.ToListAsync();
+        WaterTypeDtos = await _context.WaterTypes.Select(t => t.AsDto()).ToListAsync();
     }
 }

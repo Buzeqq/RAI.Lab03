@@ -9,9 +9,9 @@ namespace RAI.Lab03.s184934.Web.Pages.Ion;
 
 public class EditModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly WarehouseDbContext _context;
 
-    public EditModel(ApplicationDbContext context)
+    public EditModel(WarehouseDbContext context)
     {
         _context = context;
     }

@@ -10,9 +10,9 @@ namespace RAI.Lab03.s184934.Web.Pages.Water;
 
 public class IndexModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly WarehouseDbContext _context;
 
-    public IndexModel(ApplicationDbContext context)
+    public IndexModel(WarehouseDbContext context)
     {
         _context = context;
     }

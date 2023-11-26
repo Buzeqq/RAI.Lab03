@@ -13,10 +13,10 @@ namespace RAI.Lab03.s184934.Web.Pages.Water;
 
 public class CreateModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly WarehouseDbContext _context;
     private readonly IWebHostEnvironment _environment;
 
-    public CreateModel(ApplicationDbContext context, IWebHostEnvironment environment)
+    public CreateModel(WarehouseDbContext context, IWebHostEnvironment environment)
     {
         _context = context;
         _environment = environment;
