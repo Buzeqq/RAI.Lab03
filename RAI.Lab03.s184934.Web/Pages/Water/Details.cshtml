@@ -11,26 +11,71 @@
 <div>
     <h4>MineralWater</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MineralWaterDto.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MineralWaterDto.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MineralWaterDto.Ph)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MineralWaterDto.Ph)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MineralWaterDto.ImagePath)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MineralWaterDto.ImagePath)
-        </dd>
-    </dl>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr)">
+        <div>
+            <img src="@Model.MineralWaterDto.ImagePath" alt="water image"/>
+        </div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.MineralWaterDto.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MineralWaterDto.Name)
+            </dd>
+            <dt class="col-sm-2">
+                Producer
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ProducerDto.Name)
+            </dd>
+            <dt class="col-sm-2">
+                Packaging
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PackagingDto.DisplayInformation)
+            </dd>
+            <dt class="col-sm-2">
+                Type
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.WaterTypeDto.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.MineralWaterDto.Ph)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MineralWaterDto.Ph)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.MineralWaterDto.Mineralization)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MineralWaterDto.Mineralization)
+            </dd>
+            <dt class="col-sm-2">
+                Anions
+            </dt>
+            <dd class="col-sm-10">
+                <ul>
+                    @foreach (var anion in Model.AnionDtos)
+                    {
+                        <li>@anion.DisplayInformation</li>
+                    }
+                </ul>
+            </dd>
+            <dt class="col-sm-2">
+                Cations
+            </dt>
+            <dd class="col-sm-10">
+                <ul>
+                    @foreach (var cation in Model.CationDtos)
+                    {
+                        <li>@cation.DisplayInformation</li>
+                    }
+                </ul>
+            </dd>
+        </dl>
+    </div>
 </div>
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.MineralWaterDto?.Id">Edit</a> |

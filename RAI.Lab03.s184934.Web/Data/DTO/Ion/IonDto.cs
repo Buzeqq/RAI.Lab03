@@ -31,4 +31,6 @@ public sealed class IonDto
             _ => throw new ArgumentOutOfRangeException()
         };
     }
+
+    public string DisplayInformation => $"{Name}, {Symbol}, Content: {Content} g/l";
 }
