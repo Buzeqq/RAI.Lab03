@@ -45,6 +45,12 @@ internal sealed class MineralWaterConfiguration : IEntityTypeConfiguration<Miner
 
         builder
             .HasOne(x => x.Packaging)
-            .WithMany();
+            .WithMany()
+            .IsRequired();
+
+        builder
+            .HasOne<WaterMagazine>()
+            .WithOne()
+            .HasForeignKey<WaterMagazine>(m => m.WaterId);
     }
 }

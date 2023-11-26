@@ -1,5 +1,6 @@
 using RAI.Lab03.s184934.Core.Entities;
 using RAI.Lab03.s184934.Web.Data.DTO.Company;
+using RAI.Lab03.s184934.Web.Data.DTO.Delivery;
 using RAI.Lab03.s184934.Web.Data.DTO.Ion;
 using RAI.Lab03.s184934.Web.Data.DTO.MineralWater;
 using RAI.Lab03.s184934.Web.Data.DTO.Packaging;
@@ -73,5 +74,24 @@ public static class Extensions
             Ph = mineralWater.Ph.Value,
             Producer = mineralWater.Producer.Id,
             Type = mineralWater.Type.Id
+        };
+
+    public static DeliveryDto AsDto(this Delivery delivery) =>
+        new()
+        {
+            Id = delivery.Id,
+            NumberOfPallets = delivery.NumberOfPallets,
+            Date = delivery.Date,
+            Supplier = delivery.Supplier.Id,
+            Pallets = delivery.Pallets.Select(p => p.Id.Value).ToList(),
+            User = delivery.User
+        };
+
+    public static PalletDto AsDto(this Pallet pallet) =>
+        new()
+        {
+            Id = pallet.Id,
+            PalletSize = pallet.SizeOfPallet,
+            WaterId = pallet.Water.Id
         };
 }

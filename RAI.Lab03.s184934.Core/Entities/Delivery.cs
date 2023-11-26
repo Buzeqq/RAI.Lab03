@@ -10,8 +10,8 @@ public sealed class Delivery
     public string User { get; private set; }
 
 
-    public ICollection<Pallet> Pallets { get; private set; } = new List<Pallet>();
-    public Supplier Supplier { get; private set; }
+    public ICollection<Pallet> Pallets { get; set; } = new List<Pallet>();
+    public Supplier Supplier { get; set; }
 
     public Delivery(Id id, NumberOfPallets numberOfPallets, DateTime date, string user)
     {

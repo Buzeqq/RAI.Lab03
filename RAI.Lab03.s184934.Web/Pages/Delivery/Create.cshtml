@@ -1,0 +1,113 @@
+@page
+@using Microsoft.AspNetCore.Identity
+@model RAI.Lab03.s184934.Web.Pages.Delivery.CreateModel
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Delivery</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form id="delivery-form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DeliveryDto.Date" class="control-label"></label>
+                <input asp-for="DeliveryDto.Date" class="form-control" value="@DateTime.Now.ToString("s")" />
+                <span asp-validation-for="DeliveryDto.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryDto.User" class="control-label"></label>
+                <input asp-for="DeliveryDto.User" class="form-control" value="@User.Identity?.Name" readonly />
+                <span asp-validation-for="DeliveryDto.User" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryDto.NumberOfPallets" class="control-label"></label>
+                <input id="palletNumber" asp-for="DeliveryDto.NumberOfPallets" class="form-control" value="@(0)" readonly />
+                <span asp-validation-for="DeliveryDto.NumberOfPallets" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryDto.Supplier" class="control-label">Producer</label>
+                @if (Model.AvailableSuppliers.Any())
+                {
+                    <select asp-for="DeliveryDto.Supplier" asp-items="@(new SelectList(Model.AvailableSuppliers, "Id", "Name"))">
+                    </select>
+                }
+                else
+                {
+                    <p>No suppliers available!</p>
+                }
+            </div>
+            <div class="form-group">
+                <label class="control-label">Pallets</label>
+                <div class="input-group">
+                    <select id="waterType" class="form-control" asp-items="@(new SelectList(Model.AvailableMineralWaterDtos, "Id", "Name"))">
+                    </select>
+                    <input id="palletSize" class="form-control" type="number"/>
+                    <div class="input-group-append">
+                        <button id="addPallet" class="btn btn-outline-info" type="button">Add</button>
+                    </div>
+                </div>
+                <ol id="outputList" class="list-group">
+                </ol>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(() => {
+           const addButton = document.getElementById('addPallet'); 
+           const sizeInput = document.getElementById('palletSize'); 
+           const waterSelect = document.getElementById('waterType'); 
+           const palletNumber = document.getElementById('palletNumber'); 
+           const outputList = document.getElementById('outputList'); 
+           const form = document.querySelector('#delivery-form'); 
+
+          
+           addButton.addEventListener('click', () => {
+               const water = waterSelect.options[waterSelect.selectedIndex].value;
+               const size = parseInt(sizeInput.value);
+               
+               if (size <= 0 || isNaN(size)) return;
+               const currentIndex = parseInt(palletNumber.value);
+               palletNumber.value = parseInt(palletNumber.value) + 1;
+               
+               const newElement = document.createElement('li');
+               newElement.classList.add('list-group-item', 'input-group');
+               newElement.textContent = `${water}, ${size}`;
+               
+               const removeButton = document.createElement('button');
+               removeButton.classList.add('btn', 'btn-outline-danger');
+               removeButton.type = 'button';
+               removeButton.textContent = 'Remove';
+               removeButton.addEventListener('click', () => {
+                   outputList.removeChild(newElement);
+                   form.removeChild(document.querySelector(`[name="PalletDtos[${currentIndex}].WaterId"]`));
+                   form.removeChild(document.querySelector(`[name="PalletDtos[${currentIndex}].PalletSize"]`));
+                   palletNumber.value = parseInt(palletNumber.value) - 1;
+               });
+               newElement.insertAdjacentElement('beforeend', removeButton);
+               outputList.insertAdjacentElement('beforeend', newElement);
+                
+               form.insertAdjacentHTML('beforeend', `<input type="hidden" name="PalletDtos[${currentIndex}].WaterId" value="${waterSelect.value}"/>`);
+               form.insertAdjacentHTML('beforeend', `<input type="hidden" name="PalletDtos[${currentIndex}].PalletSize" value="${size}"/>`);
+           });
+        });
+    </script>
+}
+

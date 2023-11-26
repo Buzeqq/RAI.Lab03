@@ -29,16 +29,25 @@
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <li class="dropdown">
-                            <button class="nav-item btn dropdown-toggle" type="button" id="dropdownMenuButton" 
+                            <button class="nav-item btn dropdown-toggle" type="button" id="dropdownWarehouseMenuButton" 
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Warehouse
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <div class="dropdown-menu" aria-labelledby="dropdownWarehouseMenuButton">
                                 <a class="dropdown-item" asp-area="" asp-page="/Water/Index">Water</a>
                                 <a class="dropdown-item" asp-area="" asp-page="/Water/Type/Index">Water type</a>
                                 <a class="dropdown-item" asp-area="" asp-page="/Company/Index">Company</a>
                                 <a class="dropdown-item" asp-area="" asp-page="/Ion/Index">Ion</a>
                                 <a class="dropdown-item" asp-area="" asp-page="/Packaging/Index">Packaging</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <button class="nav-item btn dropdown-toggle" type="button" id="dropdownOrdersMenuButton" 
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Orders
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownOrdersMenuButton">
+                                <a class="dropdown-item" asp-area="" asp-page="/Delivery/Index">Delivery</a>
                             </div>
                         </li>
                     }
