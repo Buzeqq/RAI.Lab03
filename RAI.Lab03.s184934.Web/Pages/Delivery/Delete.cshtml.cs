@@ -26,7 +26,10 @@ namespace RAI.Lab03.s184934.Web.Pages.Delivery
                 return NotFound();
             }
 
-            var delivery = await _context.Deliveries.FirstOrDefaultAsync(m => m.Id.Equals(id));
+            var delivery = await _context.Deliveries
+                .Include(d => d.Supplier)
+                .Include(d => d.Pallets)
+                .FirstOrDefaultAsync(m => m.Id.Equals(id));
 
             if (delivery is null)
             {
@@ -43,7 +46,8 @@ namespace RAI.Lab03.s184934.Web.Pages.Delivery
             {
                 return NotFound();
             }
-            var delivery = await _context.Deliveries.FindAsync(new Id(id));
+            var delivery = await _context.Deliveries
+                .FindAsync(new Id(id));
 
             if (delivery == null) return RedirectToPage("./Index");
             

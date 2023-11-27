@@ -77,10 +77,9 @@
            const palletNumber = document.getElementById('palletNumber'); 
            const outputList = document.getElementById('outputList'); 
            const form = document.querySelector('#delivery-form'); 
-
           
            addButton.addEventListener('click', () => {
-               const water = waterSelect.options[waterSelect.selectedIndex].value;
+               const water = waterSelect.options[waterSelect.selectedIndex].textContent;
                const size = parseInt(sizeInput.value);
                
                if (size <= 0 || isNaN(size)) return;
@@ -99,6 +98,15 @@
                    outputList.removeChild(newElement);
                    form.removeChild(document.querySelector(`[name="PalletDtos[${currentIndex}].WaterId"]`));
                    form.removeChild(document.querySelector(`[name="PalletDtos[${currentIndex}].PalletSize"]`));
+                   
+                   for (const pallet of form.querySelectorAll('input[name^="PalletDtos"]')) {
+                       const name = pallet.getAttribute('name');
+                       const index = parseInt(name.slice(name.indexOf('[') + 1, name.indexOf(']')));
+                       if (index > currentIndex) {
+                           pallet.setAttribute('name', name.replace(index.toString(), (index - 1).toString()));
+                       }
+                   }
+                   
                    palletNumber.value = parseInt(palletNumber.value) - 1;
                });
                newElement.insertAdjacentElement('beforeend', removeButton);
