@@ -1,4 +1,5 @@
 @page
+@using RAI.Lab03.s184934.Web.Data
 @model RAI.Lab03.s184934.Web.Pages.Delivery.EditModel
 
 @{
@@ -12,26 +13,54 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form id="delivery-form" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Delivery.Id" />
             <div class="form-group">
-                <label asp-for="Delivery.NumberOfPallets" class="control-label"></label>
-                <input asp-for="Delivery.NumberOfPallets" class="form-control" />
-                <span asp-validation-for="Delivery.NumberOfPallets" class="text-danger"></span>
+                <label asp-for="DeliveryDto.Date" class="control-label"></label>
+                <input asp-for="DeliveryDto.Date" class="form-control" value="@DateTime.Now.ToString("s")" />
+                <span asp-validation-for="DeliveryDto.Date" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Delivery.Date" class="control-label"></label>
-                <input asp-for="Delivery.Date" class="form-control" />
-                <span asp-validation-for="Delivery.Date" class="text-danger"></span>
+                <label asp-for="DeliveryDto.User" class="control-label"></label>
+                <input asp-for="DeliveryDto.User" class="form-control" readonly />
+                <span asp-validation-for="DeliveryDto.User" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Delivery.User" class="control-label"></label>
-                <input asp-for="Delivery.User" class="form-control" />
-                <span asp-validation-for="Delivery.User" class="text-danger"></span>
+                <label asp-for="DeliveryDto.NumberOfPallets" class="control-label"></label>
+                <input id="palletNumber" asp-for="DeliveryDto.NumberOfPallets" class="form-control" readonly />
+                <span asp-validation-for="DeliveryDto.NumberOfPallets" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label asp-for="DeliveryDto.Supplier" class="control-label">Producer</label>
+                @if (Model.AvailableSuppliers.Any())
+                {
+                    <select asp-for="DeliveryDto.Supplier" asp-items="@(new SelectList(Model.AvailableSuppliers, "Id", "Name"))">
+                    </select>
+                }
+                else
+                {
+                    <p>No suppliers available!</p>
+                }
+            </div>
+            <div class="form-group">
+                <label class="control-label">Pallets</label>
+                <div class="input-group">
+                    <select id="waterType" class="form-control" asp-items="@(new SelectList(Model.AvailableMineralWaterDtos, "Id", "Name"))">
+                    </select>
+                    <input id="palletSize" class="form-control" type="number"/>
+                    <div class="input-group-append">
+                        <button id="addPallet" class="btn btn-outline-info" type="button">Add</button>
+                    </div>
+                </div>
+                <ol id="outputList" class="list-group"></ol>
+            </div>
+            @foreach (var (i, pallet) in Model.PalletDtos.Enumerate())
+            {
+                <input type="hidden" name="PalletDtos[@i].WaterId" value="@pallet.Id" />
+                <input type="hidden" name="PalletDtos[@i].PalletSize" value="@pallet.PalletSize" />
+            }
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -41,3 +70,11 @@
     <a asp-page="./Index">Back to List</a>
 </div>
 
+@section Scripts
+{
+    <script>
+        $(document).ready(() => {
+           setUpPalletList();
+        });
+    </script>
+}

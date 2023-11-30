@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RAI.Lab03.s184934.Web.Data;
 
@@ -10,9 +11,11 @@ using RAI.Lab03.s184934.Web.Data;
 namespace RAI.Lab03.s184934.Web.Migrations
 {
     [DbContext(typeof(WarehouseDbContext))]
-    partial class WarehouseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231129212526_SaleEntry")]
+    partial class SaleEntry
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
@@ -215,6 +218,9 @@ namespace RAI.Lab03.s184934.Web.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
+                    b.Property<uint>("Quantity")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -244,7 +250,7 @@ namespace RAI.Lab03.s184934.Web.Migrations
 
                     b.HasIndex("WaterId");
 
-                    b.ToTable("SaleEntries");
+                    b.ToTable("SaleEntry");
                 });
 
             modelBuilder.Entity("RAI.Lab03.s184934.Core.Entities.WaterMagazine", b =>

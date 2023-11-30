@@ -10,7 +10,7 @@ using RAI.Lab03.s184934.Web.Data;
 
 namespace RAI.Lab03.s184934.Web.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(UsersDbContext))]
     [Migration("20231114131832_MineralWater")]
     partial class MineralWater
     {

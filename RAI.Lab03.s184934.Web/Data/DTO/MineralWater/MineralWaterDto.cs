@@ -26,11 +26,17 @@ public sealed class MineralWaterDto
     public string Mineralization { get; init; } = "";
     [Required]
     public Guid? Packaging { get; init; }
-
     public string ImagePath { get; set; } = "";
 
+    public string DisplayInformation { get; } = string.Empty;
+    
     public MineralWaterDto()
     {
+    }
+
+    public MineralWaterDto(string name, string producer, string type, string package)
+    {
+        DisplayInformation = $"{name}, {producer}, {type}, {package}";
     }
 
     public Core.Entities.MineralWater AsMineralWater(Guid id) => new(id, Name, new PhValue(Ph), ImagePath);

@@ -35,7 +35,7 @@ public class DeleteModel : PageModel
         if (id == Guid.Empty) return NotFound();
         var company = await _context.Companies.FindAsync(new Id(id));
 
-        if (company == null) return RedirectToPage("./Index");
+        if (company is null) return RedirectToPage("./Index");
 
         _context.Companies.Remove(company);
         await _context.SaveChangesAsync();

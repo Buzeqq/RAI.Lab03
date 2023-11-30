@@ -23,7 +23,7 @@ public class DetailsModel : PageModel
         if (id == Guid.Empty) return NotFound();
 
         var waterType = await _context.WaterTypes.FirstOrDefaultAsync(m => m.Id == new Id(id));
-        if (waterType == null) return NotFound();
+        if (waterType is null) return NotFound();
 
         WaterType = waterType;
         return Page();

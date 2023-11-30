@@ -51,7 +51,7 @@ public class DeleteModel : PageModel
         }
         var mineralWater = await _context.MineralWaters.FindAsync(new Id(id));
 
-        if (mineralWater == null) return RedirectToPage("./Index");
+        if (mineralWater is null) return RedirectToPage("./Index");
         _context.MineralWaters.Remove(mineralWater);
         await _context.SaveChangesAsync();
 

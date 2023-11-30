@@ -24,7 +24,7 @@ public class DeleteModel : PageModel
 
         var waterType = await _context.WaterTypes.FirstOrDefaultAsync(m => m.Id == new Id(id));
 
-        if (waterType == null) return NotFound();
+        if (waterType is null) return NotFound();
 
         WaterType = new WaterTypeDto(waterType.Id, waterType.Name);
         return Page();
@@ -35,7 +35,7 @@ public class DeleteModel : PageModel
         if (id == Guid.Empty) return NotFound();
         var waterType = await _context.WaterTypes.FindAsync(new Id(id));
 
-        if (waterType == null) return RedirectToPage("./Index");
+        if (waterType is null) return RedirectToPage("./Index");
 
         _context.WaterTypes.Remove(waterType);
         await _context.SaveChangesAsync();

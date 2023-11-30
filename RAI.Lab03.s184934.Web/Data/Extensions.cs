@@ -1,9 +1,12 @@
+using Microsoft.AspNetCore.Identity;
 using RAI.Lab03.s184934.Core.Entities;
 using RAI.Lab03.s184934.Web.Data.DTO.Company;
 using RAI.Lab03.s184934.Web.Data.DTO.Delivery;
 using RAI.Lab03.s184934.Web.Data.DTO.Ion;
 using RAI.Lab03.s184934.Web.Data.DTO.MineralWater;
 using RAI.Lab03.s184934.Web.Data.DTO.Packaging;
+using RAI.Lab03.s184934.Web.Data.DTO.Sale;
+using RAI.Lab03.s184934.Web.Data.DTO.User;
 using RAI.Lab03.s184934.Web.Data.DTO.WaterType;
 
 namespace RAI.Lab03.s184934.Web.Data;
@@ -62,7 +65,7 @@ public static class Extensions
         };
 
     public static MineralWaterDto AsDto(this MineralWater mineralWater) =>
-        new()
+        new(mineralWater.Name, mineralWater.Producer.Name, mineralWater.Type.Name, mineralWater.Packaging.AsDto().DisplayInformation)
         {
             Id = mineralWater.Id,
             Anions = mineralWater.Anions.Select(a => a.Id.Value).ToList(),
@@ -93,5 +96,38 @@ public static class Extensions
             Id = pallet.Id,
             PalletSize = pallet.SizeOfPallet,
             WaterId = pallet.Water.Id
+        };
+
+    public static UserDto AsDto(this IdentityUser user) =>
+        new()
+        {
+            Email = user.Email,
+            Username = user.UserName
+        };
+
+    public static SaleDto AsDto(this Sale sale) =>
+        new()
+        {
+            Id = sale.Id,
+            DateTime = sale.Date,
+            Username = sale.UserName,
+            SaleEntries = sale.SaleEntries.Select(e => e.AsDto())
+        };
+
+    public static IEnumerable<(long counter, T item)> Enumerate<T>(this IEnumerable<T> collection)
+    {
+        long counter = 0;
+        foreach (var item in collection)
+        {
+            yield return (counter, item);
+            counter++;
+        }
+    }
+
+    public static SaleEntryDto AsDto(this SaleEntry entry) =>
+        new()
+        {
+            Quantity = entry.Quantity,
+            WaterId = entry.Water.Id
         };
 }

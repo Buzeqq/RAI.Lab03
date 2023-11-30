@@ -17,17 +17,20 @@ internal sealed class IonConfiguration : IEntityTypeConfiguration<Ion>
 
         builder
             .Property(x => x.Name)
-            .HasConversion(x => x.Value, x => new IonName(x))
+            .HasConversion(x => x.Value,
+                x => new IonName(x))
             .IsRequired();
 
         builder
             .Property(x => x.Symbol)
-            .HasConversion(x => x.Value, x => new IonSymbol(x))
+            .HasConversion(x => x.Value,
+                x => new IonSymbol(x))
             .IsRequired();
 
         builder
             .Property(x => x.Content)
-            .HasConversion(x => x.Content, x => new ContentInGramsPerLiter(x))
+            .HasConversion(x => x.Content,
+                x => new ContentInGramsPerLiter(x))
             .IsRequired();
 
         builder

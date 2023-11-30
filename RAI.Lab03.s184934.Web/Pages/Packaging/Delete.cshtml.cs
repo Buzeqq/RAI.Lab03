@@ -28,7 +28,7 @@ public class DeleteModel : PageModel
 
         var packaging = await _context.Packaging.FirstOrDefaultAsync(m => m.Id == new Id(id));
 
-        if (packaging == null)
+        if (packaging is null)
         {
             return NotFound();
         }
@@ -45,7 +45,7 @@ public class DeleteModel : PageModel
         }
         var packaging = await _context.Packaging.FindAsync(new Id(id));
 
-        if (packaging == null) return RedirectToPage("./Index");
+        if (packaging is null) return RedirectToPage("./Index");
         _context.Packaging.Remove(packaging);
         await _context.SaveChangesAsync();
 

@@ -1,16 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using RAI.Lab03.s184934.Core.Entities;
 
 namespace RAI.Lab03.s184934.Web.Data;
-
-public class ApplicationDbContext : IdentityDbContext
-{
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options)
-    {
-    }
-}
 
 public class WarehouseDbContext : DbContext
 {
@@ -24,6 +15,7 @@ public class WarehouseDbContext : DbContext
     public DbSet<Producer> Producers { get; set; }
     public DbSet<Supplier> Supplier { get; set; }
     public DbSet<Sale> Sales { get; set; }
+    public DbSet<SaleEntry> SaleEntries { get; set; }
     public DbSet<Delivery> Deliveries { get; set; }
     public DbSet<Pallet> Pallets { get; set; }
     

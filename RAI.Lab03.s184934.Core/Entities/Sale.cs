@@ -5,15 +5,16 @@ namespace RAI.Lab03.s184934.Core.Entities;
 public sealed class Sale
 {
     public Id Id { get; private set; }
-    public uint Quantity { get; private set; }
     public DateTime Date { get; private set; }
-    
     public string UserName { get; private set; }
 
-    public Sale(Id id, uint quantity, DateTime date)
+    
+    public ICollection<SaleEntry> SaleEntries { get; set; } = new List<SaleEntry>();
+
+    public Sale(Id id, DateTime date, string userName)
     {
         Id = id;
-        Quantity = quantity;
         Date = date;
+        UserName = userName;
     }
 }

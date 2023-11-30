@@ -9,7 +9,7 @@ using RAI.Lab03.s184934.Web.Data;
 
 namespace RAI.Lab03.s184934.Web.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(UsersDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

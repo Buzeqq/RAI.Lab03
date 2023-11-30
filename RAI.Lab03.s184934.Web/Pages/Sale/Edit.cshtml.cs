@@ -3,11 +3,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RAI.Lab03.s184934.Core.ValueObjects;
 using RAI.Lab03.s184934.Web.Data;
-using RAI.Lab03.s184934.Web.Data.DTO.Company;
-using RAI.Lab03.s184934.Web.Data.DTO.Delivery;
 using RAI.Lab03.s184934.Web.Data.DTO.MineralWater;
+using RAI.Lab03.s184934.Web.Data.DTO.Sale;
 
-namespace RAI.Lab03.s184934.Web.Pages.Delivery
+namespace RAI.Lab03.s184934.Web.Pages.Sale
 {
     public class EditModel : PageModel
     {
@@ -19,10 +18,9 @@ namespace RAI.Lab03.s184934.Web.Pages.Delivery
         }
 
         [BindProperty]
-        public DeliveryDto DeliveryDto { get; set; } = default!;
+        public SaleDto SaleDto { get; set; } = default!;
         
-        public IEnumerable<PalletDto> PalletDtos { get; set; }
-        public IEnumerable<CompanyDto> AvailableSuppliers { get; set; }
+        public IEnumerable<SaleEntryDto> SaleEntryDtos { get; set; }
         public IEnumerable<MineralWaterDto> AvailableMineralWaterDtos { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid id)
@@ -40,27 +38,22 @@ namespace RAI.Lab03.s184934.Web.Pages.Delivery
                 .Include(w => w.Producer)
                 .Include(w => w.Type)
                 .Select(s => s.AsDto()).ToListAsync();
-            AvailableSuppliers = await _context.Supplier
-                .AsNoTracking()
-                .Select(s => s.AsDto())
-                .ToListAsync();
-            var delivery =  await _context.Deliveries
-                .Include(d => d.Supplier)
-                .Include(d => d.Pallets)
+            var sale =  await _context.Sales
+                .Include(d => d.SaleEntries)
                 .FirstOrDefaultAsync(m => m.Id.Equals(id));
 
-            PalletDtos = await _context.Pallets
+            SaleEntryDtos = await _context.SaleEntries
                 .AsNoTracking()
                 .Include(p => p.Water)
-                .Where(p => delivery!.Pallets.Select(pa => pa.Id).Contains(p.Id))
+                .Where(p => sale!.SaleEntries.Select(pa => pa.Id).Contains(p.Id))
                 .Select(p => p.AsDto())
                 .ToListAsync();
             
-            if (delivery is null)
+            if (sale is null)
             {
                 return NotFound();
             }
-            DeliveryDto = delivery.AsDto();
+            SaleDto = sale.AsDto();
             return Page();
         }
 
@@ -73,7 +66,7 @@ namespace RAI.Lab03.s184934.Web.Pages.Delivery
                 return Page();
             }
 
-            _context.Attach(DeliveryDto).State = EntityState.Modified;
+            _context.Attach(SaleDto).State = EntityState.Modified;
 
             try
             {
@@ -81,7 +74,7 @@ namespace RAI.Lab03.s184934.Web.Pages.Delivery
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DeliveryExists(DeliveryDto.Id))
+                if (!DeliveryExists(SaleDto.Id))
                 {
                     return NotFound();
                 }

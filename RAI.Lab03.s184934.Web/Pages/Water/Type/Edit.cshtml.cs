@@ -24,7 +24,7 @@ internal class EditModel : PageModel
         if (id == Guid.Empty) return NotFound();
 
         var watertype = await _context.WaterTypes.FirstOrDefaultAsync(m => m.Id == (Id)id);
-        if (watertype == null) return NotFound();
+        if (watertype is null) return NotFound();
         WaterType = new WaterTypeDto(watertype.Id, watertype.Name);
         return Page();
     }
